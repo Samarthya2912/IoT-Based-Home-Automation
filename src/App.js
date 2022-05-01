@@ -1,23 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import { Button, ButtonGroup, TextField, Typography } from '@mui/material';
+import { useState } from 'react';
 
 function App() {
+  const [ip,setip] = useState("192.168.43.133");
+
+  const on = () => {
+    fetch(`http://${ip}/on`);
+  }
+
+  const off = () => {
+    fetch(`http://${ip}/off`);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Typography>Router IP Address:</Typography>
+      <TextField value={ip}  onChange={e => setip(e.target.value)} />
+      <ButtonGroup>
+        <Button onClick={off}>OFF</Button>
+        <Button onClick={on}>ON</Button>
+      </ButtonGroup>
     </div>
   );
 }
